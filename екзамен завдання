@@ -1,0 +1,33 @@
+# Вводимо матрицю A
+print("Введіть матрицю A (4 рядки по 5 чисел):")
+A = []
+for i in range(4):
+    row = list(map(float, input().split()))
+    A.append(row)
+
+# Вводимо матрицю B
+print("Введіть матрицю B (4 рядки по 5 чисел):")
+B = []
+for i in range(4):
+    row = list(map(float, input().split()))
+    B.append(row)
+
+# Знаходимо індекс рядка з максимальним елементом у A
+max_A = max(max(row) for row in A)
+row_A = next(i for i, row in enumerate(A) if max_A in row)
+
+# Знаходимо індекс рядка з максимальним елементом у B
+max_B = max(max(row) for row in B)
+row_B = next(i for i, row in enumerate(B) if max_B in row)
+
+# Міняємо рядки місцями
+A[row_A], B[row_B] = B[row_B], A[row_A]
+
+# Виводимо матриці
+print("Матриця A після обміну:")
+for row in A:
+    print(row)
+
+print("Матриця B після обміну:")
+for row in B:
+    print(row)
