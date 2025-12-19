@@ -1,33 +1,38 @@
-# Вводимо матрицю A
-print("Введіть матрицю A (4 рядки по 5 чисел):")
-A = []
-for i in range(4):
-    row = list(map(float, input().split()))
-    A.append(row)
+# Функція для введення матриці
+def input_matrix(name, rows=4, cols=5):
+    print(f"Введіть матрицю {name} ({rows} рядки по {cols} чисел):")
+    matrix = []
+    for i in range(rows):
+        row = list(map(float, input(f"Рядок {i+1}: ").split()))
+        matrix.append(row)
+    return matrix
 
-# Вводимо матрицю B
-print("Введіть матрицю B (4 рядки по 5 чисел):")
-B = []
-for i in range(4):
-    row = list(map(float, input().split()))
-    B.append(row)
+# Функція для знаходження індексу рядка з максимальним елементом
+def max_row_index(matrix):
+    max_val = max(max(row) for row in matrix)
+    for i, row in enumerate(matrix):
+        if max_val in row:
+            return i
 
-# Знаходимо індекс рядка з максимальним елементом у A
-max_A = max(max(row) for row in A)
-row_A = next(i for i, row in enumerate(A) if max_A in row)
+# Функція для обміну рядків між двома матрицями
+def swap_max_rows(A, B):
+    row_A = max_row_index(A)
+    row_B = max_row_index(B)
+    A[row_A], B[row_B] = B[row_B], A[row_A]
 
-# Знаходимо індекс рядка з максимальним елементом у B
-max_B = max(max(row) for row in B)
-row_B = next(i for i, row in enumerate(B) if max_B in row)
+# Функція для виведення матриці
+def print_matrix(matrix, name):
+    print(f"Матриця {name}:")
+    for row in matrix:
+        print(row)
 
-# Міняємо рядки місцями
-A[row_A], B[row_B] = B[row_B], A[row_A]
+# Основна програма
+def main():
+    A = input_matrix("A")
+    B = input_matrix("B")
+    swap_max_rows(A, B)
+    print_matrix(A, "A після обміну")
+    print_matrix(B, "B після обміну")
 
-# Виводимо матриці
-print("Матриця A після обміну:")
-for row in A:
-    print(row)
-
-print("Матриця B після обміну:")
-for row in B:
-    print(row)
+# Виклик основної програми
+main()
